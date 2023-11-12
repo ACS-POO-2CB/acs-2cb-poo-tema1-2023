@@ -38,18 +38,13 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-create-user", "-u 'uchii_cu_cel'", "-p 'unghii2022'"});
-
-        // assertion
-//       assertEquals("{ 'status' : 'ok', 'message' : 'User created successfully'}".replace("' ", "'").replace(" '","'"),
-//               bos.toString().trim().replace("' ", "'").replace(" '","'"));
+        App.main(new String[]{"-create-user", "-u 'uchii_cu_cel'", "-p 'unghii2023'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-
-        App.main(new String[]{"-create-user", "-u 'uchii_cu_cel'", "-p 'unghii2022'"});
+        App.main(new String[]{"-create-user", "-u 'uchii_cu_cel'", "-p 'unghii2023'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'User already exists'}".replace("' ", "'").replace(" '","'"),
@@ -61,7 +56,6 @@ public class AppTest
         // action
         App.main(new String[]{"-cleanup-all"});
     }
-
 
     @Test
     public void testCreateUserNoUsername()
@@ -266,7 +260,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–create-post -u ‘my_username’ -p ‘my_password’ -text ‘Astăzi mă simt bine’"});
+        App.main(new String[]{"–create-post -u ‘test’ -p ‘test’"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'No text provided'}".replace("' ", "'").replace(" '","'"),
@@ -297,10 +291,10 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'", "-text 'Astazi ma simt bine'"});
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'", "-text 'A sosit toamna. Un anotimp frumos, cu multe recolte si multe bucurii. Frunzele ruginii au acoperit asfaltul incalzit de usoarele raze de soare, pe jos parca este un covor tesut din aur si bronz. Totul in jur este incredibil ! Insa, totodata natura cedeaza, pleaca pasarile, unele animalele hiberneaza, crengile pomiilor raman fara frunze. Dansul frunzelor ruginii este un peisaj mirific. Parca ai fi intr-o poveste de vis, din care nu ai mai vrea sa iesi. '"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : 'Post text lenght exceeded'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'error', 'message' : 'Post text length exceeded'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -469,7 +463,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-delete-post-by-id", "-u 'test'", "-p 'test'"});
+        App.main(new String[]{"-delete-post-by-id", "-u 'test'", "-p 'test'", "-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The identifier was not valid'}".replace("' ", "'").replace(" '", "'"),
@@ -480,8 +474,6 @@ public class AppTest
 
         // action
         App.main(new String[]{"-cleanup-all"});
-
-
     }
 
     @Test
@@ -519,7 +511,6 @@ public class AppTest
         // action
         App.main(new String[]{"-cleanup-all"});
     }
-
 
     //endregion
 
@@ -649,10 +640,10 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-follow-user-by-username", "-u 'test'", "-p 'test'", "-username 'username1'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test'", "-p 'test'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : 'No username to unfollow was provided'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'error', 'message' : 'No username to follow was provided'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -681,10 +672,10 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-follow-user-by-username", "-u 'test'", "-p 'test2'", "-username 'username1'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test'", "-p 'test'", "-username 'test2'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : 'The username to unfollow was not valid'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'error', 'message' : 'The username to follow was not valid'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -712,7 +703,19 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-follow-user-by-username", "-u 'test'", "-p 'test2'", "-username 'username1'"});
+        App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"-follow-user-by-username", "-u 'test'", "-p 'test'", "-username 'test2'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"-follow-user-by-username", "-u 'test'", "-p 'test'", "-username 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The username to follow was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -737,9 +740,17 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–follow-user-by-username", "-u 'test'", "-p 'test'", "-username 'username1'"});
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
+        // action
+        App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
+        // action
+        App.main(new String[]{"–follow-user-by-username", "-u 'test'", "-p 'test'", "-username 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : 'Operation executed successfully'}".replace("' ", "'").replace(" '","'"),
@@ -756,8 +767,6 @@ public class AppTest
     //endregion
 
     //region 5 Unfollow utilizator
-
-
     @Test
     public void testUnfollowNoUsername()
     {
@@ -876,7 +885,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'", "-username 'username1'"});
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
@@ -914,7 +923,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-unfollow-user-by-username", "-u 'test'", "-p 'test2'", "-username 'username1'"});
+        App.main(new String[]{"-unfollow-user-by-username", "-u 'test'", "-p 'test'", "-username 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The username to unfollow was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -939,13 +948,17 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'", "-username 'username1'"});
-
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-unfollow-user-by-username", "-u 'test'", "-p 'test2'", "-username 'username1'"});
+        App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"-unfollow-user-by-username", "-u 'test'", "-p 'test'", "-username 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The username to unfollow was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -970,9 +983,22 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–follow-user-by-username", "-u 'test'", "-p 'test'", "-username 'username1'"});
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
+        // action
+        App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
+        // action
+        App.main(new String[]{"–follow-user-by-username", "-u 'test'", "-p 'test'", "-username 'test2'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"–unfollow-user-by-username", "-u 'test'", "-p 'test'", "-username 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : 'Operation executed successfully'}".replace("' ", "'").replace(" '","'"),
@@ -987,7 +1013,7 @@ public class AppTest
 
 
     //endregion
-    //regoin 6 Like unei postari
+    //region 6 Like unei postari
 
     @Test
     public void testLikePostNoUsername()
@@ -1144,7 +1170,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-like-post", "-u 'test'", "-p 'test2'", "-post-id 'post_id1'"});
+        App.main(new String[]{"-like-post", "-u 'test'", "-p 'test'", "-post-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The post identifier to like was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -1169,13 +1195,31 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'", "-post-id 'post_id1'"});
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-like-post", "-u 'test'", "-p 'test2'", "-post-id '-post_id1'"});
+        App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", "-text 'Afara este frumos'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"-like-post", "-u 'test'", "-p 'test'", "-post-id '1'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"-like-post", "-u 'test'", "-p 'test'", "-post-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The post identifier to like was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -1199,7 +1243,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-user", "-u 'test1'", "-p 'test1'"});
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
@@ -1209,17 +1253,13 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-
-        App.main(new String[]{"-create-post", "-u 'test1'", "-p 'test1'"," -text 'Imi beau cafeaua'",  "date 'date1'"});
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'","-text 'Imi beau cafeaua'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-
         // action
-        App.main(new String[]{"–like-post", "-u 'test2'", "-p 'test2'", "-post-id 'post_id1'"});
-
-
+        App.main(new String[]{"–like-post", "-u 'test2'", "-p 'test2'", "-post-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : 'Operation executed successfully'}".replace("' ", "'").replace(" '","'"),
@@ -1391,7 +1431,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-unlike-post", "-u 'test'", "-p 'test2'", "-post-id 'post_id1'"});
+        App.main(new String[]{"-unlike-post", "-u 'test'", "-p 'test'", "-post-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The post identifier to unlike was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -1416,13 +1456,23 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'", "-post-id 'post_id1'"});
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'","-text 'Imi beau cafeaua'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-unlike-post", "-u 'test'", "-p 'test2'", "-post-id '-post_id1'"});
+        App.main(new String[]{"–unlike-post", "-u 'test2'", "-p 'test2'", "-post-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The post identifier to unlike was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -1447,9 +1497,26 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–unlike-post", "-u 'test'", "-p 'test'", "-post-id 'post_id1'"});
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
+        // action
+        App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'","-text 'Imi beau cafeaua'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"–like-post", "-u 'test2'", "-p 'test2'", "-post-id '1'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"–unlike-post", "-u 'test2'", "-p 'test2'", "-post-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : 'Operation executed successfully'}".replace("' ", "'").replace(" '","'"),
@@ -1462,11 +1529,8 @@ public class AppTest
         App.main(new String[]{"-cleanup-all"});
     }
 
-
     //endregion
-
     //region 8 Like unui comentariu
-
 
     @Test
     public void testLikeCommentNoUsername()
@@ -1618,12 +1682,11 @@ public class AppTest
 
         // action
         App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
-
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-like-comment", "-u 'test'", "-p 'test2'", "-comment-id 'comment_id1'"});
+        App.main(new String[]{"-like-comment", "-u 'test'", "-p 'test'", "-comment-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The comment identifier to like was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -1649,12 +1712,28 @@ public class AppTest
 
         // action
         App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
+        App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'","-text 'Astazi ma simt bine'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"comment-post", "-u 'test'", "-p 'test'", "-post-id '1'", "-text 'Foarte bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-like-comment", "-u 'test'", "-p 'test'", "-comment-id 'test1'"});
+        App.main(new String[]{"-like-comment", "-u 'test2'", "-p 'test2'", "-comment-id '1'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"-like-comment", "-u 'test2'", "-p 'test2'", "-comment-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The comment identifier to like was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -1678,41 +1757,24 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-
-        App.main(new String[]{"-create-user", "-u 'test1'", "-p 'test1'"});
-
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
-
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-user", "-u 'test3'", "-p 'test3'"});
-
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'"," -text 'Astazi ma simt bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-
-        App.main(new String[]{"-create-post", "-u 'test1'", "-p 'test1'"," -text 'Astazi ma simt bine'"});
-
+        App.main(new String[]{"comment-post", "-u 'test'", "-p 'test'", "post-id '1'", "-text 'Imi pare rau'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-
-
-        App.main(new String[]{"comment-post", "-u 'test2'", "-p 'test2'","post-id 'post_id1'", "-text 'Imi pare rau'"});
-
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
-
-
 
         // action
-        App.main(new String[]{"–like-comment", "-u 'test3'", "-p 'test3'", "-comment-id 'comment_id1'"});
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
-
+        App.main(new String[]{"–like-comment", "-u 'test2'", "-p 'test2'", "-comment-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : 'Operation executed successfully'}".replace("' ", "'").replace(" '","'"),
@@ -1725,12 +1787,9 @@ public class AppTest
         App.main(new String[]{"-cleanup-all"});
     }
 
-
     //endregion
 
     //region 9 Unlike unui comentariu
-
-
     @Test
     public void testUnlikeCommentNoUsername()
     {
@@ -1858,7 +1917,7 @@ public class AppTest
         App.main(new String[]{"-unlike-comment", "-u 'test'", "-p 'test'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : 'No comment identifier to unlike was povided'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'error', 'message' : 'No comment identifier to unlike was provided'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -1881,12 +1940,11 @@ public class AppTest
 
         // action
         App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
-
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-unlike-comment", "-u 'test'", "-p 'test2'", "-comment-id 'comment_id1'"});
+        App.main(new String[]{"-unlike-comment", "-u 'test'", "-p 'test'", "-comment-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The comment identifier to unlike was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -1911,13 +1969,25 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'", "-comment-id 'comment_id1'"});
-
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-unlike-comment", "-u 'test'", "-p 'test2'", "-comment-id 'comment_id1'"});
+        App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'"," -text 'Astazi ma simt bine'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"comment-post", "-u 'test'", "-p 'test'", "post-id '1'", "-text 'Imi pare rau'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"–unlike-comment", "-u 'test2'", "-p 'test2'", "-comment-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The comment identifier to unlike was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -1942,9 +2012,30 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–unlike-comment", "-u 'test'", "-p 'test'", "-comment-id 'comment_id1'"});
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
+        // action
+        App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'"," -text 'Astazi ma simt bine'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"comment-post", "-u 'test'", "-p 'test'", "post-id '1'", "-text 'Imi pare rau'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"–like-comment", "-u 'test2'", "-p 'test2'", "-comment-id '1'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"–unlike-comment", "-u 'test2'", "-p 'test2'", "-comment-id '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : 'Operation executed successfully'}".replace("' ", "'").replace(" '","'"),
@@ -1961,8 +2052,6 @@ public class AppTest
     //endregion
 
     //region 10 Lista postari a persoanelor urmarite, ordonate descrescator dupa data
-
-
     @Test
     public void testFollowingsNoUsername()
     {
@@ -1975,7 +2064,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–get-followings-posts "});
+        App.main(new String[]{"–get-followings-posts"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -2000,7 +2089,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–get-followings-posts ", "-u 'test'"});
+        App.main(new String[]{"–get-followings-posts", "-u 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -2025,7 +2114,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–get-followings-posts ", "-u 'test'", "-p 'test'"});
+        App.main(new String[]{"–get-followings-posts", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -2050,13 +2139,13 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–get-followings-posts ", "-u 'test'", "-p 'test'"});
+        App.main(new String[]{"–get-followings-posts", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–get-followings-posts ", "-u 'test'", "-p 'test2'"});
+        App.main(new String[]{"–get-followings-posts", "-u 'test'", "-p 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -2076,66 +2165,64 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         App.main(new String[]{"-cleanup-all"});
+
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-
-
         App.main(new String[]{"-create-user", "-u 'test1'", "-p 'test1'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-
         App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-
         App.main(new String[]{"-create-user", "-u 'test3'", "-p 'test3'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-
-
         App.main(new String[]{"-create-user", "-u 'test4'", "-p 'test4'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-
-
-        App.main(new String[]{"-create-post", "-u 'test1'", "-p 'test1'", "post_id '1'", " -text 'Astazi ma simt bine'", "post_date 'date1'"});
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", " -text 'Astazi ma simt bine'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-
-
-        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", "post_id '2'", " -text 'Am terminat temele'", "post_date 'date2'"});
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", " -text 'Am terminat temele'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-
-
-        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'", "post_id '3'", " -text 'Merg la pescuit'", "post_date 'date3'"});
+        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'", " -text 'Merg la pescuit'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-
-
-        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'", "post_id '4'", " -text 'Ma plimb in parc'", "post_date 'date4'"});
+        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'", " -text 'Ma plimb in parc'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
+        App.main(new String[]{"-follow-user-by-username", "-u 'test1'", "-p 'test1'", " -username 'test2'"});
 
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+        App.main(new String[]{"-follow-user-by-username", "-u 'test1'", "-p 'test1'", " -username 'test3'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+        App.main(new String[]{"-follow-user-by-username", "-u 'test1'", "-p 'test1'", " -username 'test4'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
         // action
         App.main(new String[]{"–get-followings-posts", "-u 'test'", "-p 'test'"});
 
         // assertion
-        assertEquals(("{ “status” : “ok”, “message” : [{“post_id” : “1”, “post_text” :" +
-                        " “Astazi ma simt bine”, “post_date” : “date1”, “username” : “test1”}," +
-                        " {“post_id”: “2”, “post_text” : “Am terminat temele”, “post_date” : “date2”, “username” :" +
-                        " “test2”" +
-                        "{“post_id” : “3”, “post_text” : “Merg la pescuit”, “post_date” : “date3”, “username” : “test3”}" +
-                        "{“post_id” : “4”, “post_text” : “Ma plimb in parc”, “post_date” : “date4”, “username” : “test4”}}")
+        assertEquals(("{ “status” : “ok”, “message” : [" +
+                        "{“post_id” : “4”, “post_text” : “Ma plimb in parc”, “post_date” : “date4”, “username” : “test4”}," +
+                        "{“post_id” : “3”, “post_text” : “Merg la pescuit”, “post_date” : “date3”, “username” : “test3”}," +
+                        "{“post_id” : “2”, “post_text” : “Am terminat temele”, “post_date” : “date2”, “username” : “test2”}," +
+                        "{“post_id” : “1”, “post_text” : “Astazi ma simt bine”, “post_date” : “date1”, “username” : “test1”}]}"
+                    )
                         .replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
@@ -2146,12 +2233,9 @@ public class AppTest
         App.main(new String[]{"-cleanup-all"});
     }
 
-
     //endregion
 
     //region 11 Lista postari per utilizator, ordonate descrescator dupa data
-
-
     @Test
     public void testUserPostsNoUsername()
     {
@@ -2239,7 +2323,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–get-user-posts", "-u 'test'", "-p 'test'"});
+        App.main(new String[]{"–create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
@@ -2271,12 +2355,11 @@ public class AppTest
 
         // action
         App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
-
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–get-user-posts", "-u 'test'", "-p 'test'", "-username 'username1'"});
+        App.main(new String[]{"–get-user-posts", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'No username to list posts was provided'}".replace("' ", "'").replace(" '","'"),
@@ -2302,12 +2385,11 @@ public class AppTest
 
         // action
         App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
-
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-get-user-posts", "-u 'test'", "-p 'test2'", "-username 'username1'"});
+        App.main(new String[]{"-get-user-posts", "-u 'test'", "-p 'test'", "-username 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The username to list posts was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -2332,13 +2414,18 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'", "-username 'username1'"});
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-get-user-posts", "-u 'test'", "-p 'test2'", "-username 'username1'"});
+        App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        // action
+        App.main(new String[]{"-get-user-posts", "-u 'test'", "-p 'test'", "-username 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The username to list posts was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -2362,45 +2449,45 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-
         App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
-
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-
-        App.main(new String[]{"-create-post", "-u 'test1'", "-p 'test1'", "post_id '1'", " -text 'Astazi ma simt bine'", "post_date 'date1'"});
-
+        App.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-
-        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", "post_id '2'", " -text 'Am terminat temele'", "post_date 'date2'"});
-
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", "-text 'Astazi ma simt bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-
-        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'", "post_id '3'", " -text 'Merg la pescuit'", "post_date 'date3'"});
-
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", "-text 'Am terminat temele'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-
-        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'", "post_id '4'", " -text 'Ma plimb in parc'", "post_date 'date4'"});
-
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", "-text 'Merg la pescuit'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", "-text 'Ma plimb in parc'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+        App.main(new String[]{"-follow-user-by-username", "-u 'test'", "-p 'test'", "-username 'test2'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+        App.main(new String[]{"-get-user-posts", "-u 'test'", "-p 'test'", "-username 'test2'"});
 
         // assertion
-        assertEquals(("{“status” : “ok”, “message” :" +
-                        " [{“post_id” : “1”, “post_text” :" +
-                        " “Astazi ma simt bine”, “post_date” : “date1”}," +
-                        " {“post_id”: “2”, “post_text” : " +
-                        "“Am terminat temele”, “post_date” : “date2”}" +
+        assertEquals(("{“status” : “ok”, “message” :" + " [" +
+                        "{“post_id” : “4”, “post_text” : “Ma plimb in parc”, “post_date” : “4”}" +
                         "{“post_id” : “3”, “post_text” : “Merg la pescuit”, “post_date” : “3”}" +
-                        "{“post_id” : “4”, “post_text” : “Ma plimb in parc”, “post_date” : “4”}}")
+                        "{“post_id” : “2”, “post_text” : “Am terminat temele”, “post_date” : “date2”}" +
+                        "{“post_id” : “1”, “post_text” : “Astazi ma simt bine”, “post_date” : “date1”}," +
+                        "]}")
                         .replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
@@ -2414,7 +2501,6 @@ public class AppTest
     //endregion
 
     //region 12 Detalii postare (text, număr de like-uri, listă comentarii postare, ordonate descrescător după dată)
-
 
     @Test
     public void testPostDetailsNoUsername()
@@ -2602,7 +2688,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "post-id 'post_id1'"});
+
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'The post identifier was not valid'}".replace("' ", "'").replace(" '","'"),
@@ -2636,17 +2722,17 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'", "post_id '1'", " -text 'Am terminat temele'", "post_date 'date1'", "number_of_likes '100'"});
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'", " -text 'Am terminat temele'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"–comment-post", "-u 'test1'", "-p 'test1'", "comment_id '2'",  " -text 'Felicitari'", "comment_date 'datec1'", "number_of_likes '60'"});
+        App.main(new String[]{"–comment-post", "-u 'test1'", "-p 'test1'",  " -text 'Felicitari'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "post-id 'post_id1'"});
 
         // assertion
         assertEquals(("{“status” : “ok”, “message” : [{“post_text” : “Am terminat temele”, “post_date” :" +
@@ -3074,6 +3160,28 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         App.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+
+        App.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-create-user", "-u 'test1'", "-p 'test1'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'"," -text 'Imi beau cafeaua'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+
+        App.main(new String[]{"–comment-post", "-u 'test1'", "-p 'test1'", "post-id 'post_id1'", "-text 'Astazi ma simt bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -3673,40 +3781,52 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test1'", "-p 'test1'"," -text 'Astazi ma simt bine'", "date 'date1'"});
+        App.main(new String[]{"-create-post", "-u 'test1'", "-p 'test1'"," -text 'Astazi ma simt bine'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'"," -text 'Am terminat temele'", "date 'date2'"});
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'"," -text 'Am terminat temele'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'"," -text 'Merg la pescuit'", "date 'date3'"});
+        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'"," -text 'Merg la pescuit'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'"," -text 'Ma plimb in parc'", "date 'date4'"});
+        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'"," -text 'Ma plimb in parc'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test5'", "-p 'test5'"," -text 'Imi beau cafeaua'",  "date 'date5'"});
+        App.main(new String[]{"-create-post", "-u 'test5'", "-p 'test5'"," -text 'Imi beau cafeaua'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test6'", "-p 'test6'"," -text 'Cerul este insorit'", "date 'date6'"});
+        App.main(new String[]{"-create-post", "-u 'test6'", "-p 'test6'"," -text 'Cerul este insorit'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "-post-id '1'"});
+
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "-post-id '2'"});
+
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "-post-id '3'"});
+
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "-post-id '4'"});
+
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "-post-id '5'"});
+
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "-post-id '6'"});
 
 
         App.main(new String[]{"-like-post", "-u 'test2'", "-p 'test2'", "-post-id '1'"});
@@ -3892,82 +4012,89 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test1'", "-p 'test1'"," -text 'Astazi ma simt bine'", "date 'date1'"});
+        App.main(new String[]{"-create-post", "-u 'test1'", "-p 'test1'"," -text 'Astazi ma simt bine'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'"," -text 'Am terminat temele'", "date 'date2'"});
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'"," -text 'Am terminat temele'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'"," -text 'Merg la pescuit'", "date 'date3'"});
+        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'"," -text 'Merg la pescuit'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'"," -text 'Ma plimb in parc'", "date 'date4'"});
+        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'"," -text 'Ma plimb in parc'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test5'", "-p 'test5'"," -text 'Imi beau cafeaua'",  "date 'date5'"});
+        App.main(new String[]{"-create-post", "-u 'test5'", "-p 'test5'"," -text 'Imi beau cafeaua'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test6'", "-p 'test6'"," -text 'Cerul este insorit'", "date 'date6'"});
+        App.main(new String[]{"-create-post", "-u 'test6'", "-p 'test6'"," -text 'Cerul este insorit'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-comment-post", "-u 'test1'", "-p 'test1'", "-post-id '1'",  "-text 'Foarte bine'"});
+        App.main(new String[]{"-comment-post", "-u 'test1'", "-p 'test1'", "post-id '1'", "-text 'Foarte bine'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-comment-post", "-u 'test2'", "-p 'test2'", "-post-id '2'", "-text 'Incredibil!'"});
+        App.main(new String[]{"-comment-post", "-u 'test2'", "-p 'test2'", "post-id '2'", "-text 'Incredibil!'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-comment-post", "-u 'test3'", "-p 'test3'", "-post-id '3'", "-text 'Imi pare rau'"});
+        App.main(new String[]{"-comment-post", "-u 'test3'", "-p 'test3'", "post-id '3'", "-text 'Imi pare rau'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-comment-post", "-u 'test4'", "-p 'test4'", "-post-id '4'", "-text 'Pofta buna'"});
+        App.main(new String[]{"-comment-post", "-u 'test4'", "-p 'test4'", "post-id '4'","-text 'Pofta buna'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-comment-post", "-u 'test5'", "-p 'test5'", "-post-id '5'", "-text 'Felicitari'"});
+        App.main(new String[]{"-comment-post", "-u 'test5'", "-p 'test5'", "post-id '5'","-text 'Felicitari'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-comment-post", "-u 'test6'", "-p 'test6'", "-post-id '6'", "-text 'La multi ani!'"});
+        App.main(new String[]{"-comment-post", "-u 'test6'", "-p 'test6'", "post-id '6'", "-text 'La multi ani!'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-get-top-commented-posts", "-n 5"});
+        App.main(new String[]{"-get-top-commented-posts","-u ‘test1’ -p 'test1"});
 
+        App.main(new String[]{"-get-top-commented-posts","-u ‘test2’ -p 'test2"});
+
+        App.main(new String[]{"-get-top-commented-posts","-u ‘test3’ -p 'test3"});
+
+        App.main(new String[]{"-get-top-commented-posts","-u ‘test4’ -p 'test4"});
+
+        App.main(new String[]{"-get-top-commented-posts","-u ‘test5’ -p 'test5"});
 
 
         // assertion
-        assertEquals(("{ “status” : “ok”, “message” : [{“post_id” : “1”,“post_text” : “Astazi ma simt bine”, “post_date” : “post_date1”, “username” : “test1”, “number_of_comments” : “100” },\" +\n" +
-                        "                        \"{“post_id” : “2”,“post_text” : “Am terminat temele” : “post_date2”, “username” : “test2”, “number_of_comments” : “110” }\" +\n" +
-                        "                        \"{“post_id” : “3”,“post_text” : “Merg la pescuit”, “post_date3” : “post_date3”, “username” : “test3”, “number_of_comments” : “120” }\" +\n" +
-                        "                        \"{“post_id” : “4”,“post_text” : “Ma plimb in parc”, “post_date4” : “post_date4”, “username” : “test4”, “number_of_comments” : “130”}\" +\n" +
-                        "                        \"{“post_id” : “5”,“post_text” : “Imi beau cafeaua” : “post_date5”, “username” : “test5”, “number_of_comments” : “140”  }").replace("' ", "'").replace(" '","'"),
+        assertEquals(("{ “status” : “ok”, “message” : [{“post_id” : “1”,“post_text” : “Astazi ma simt bine”, “post_date” : “post_date1”, “username” : “test1”, “number_of_comments” : “number_of_comments1” },\" +\n" +
+                        "                        \"{“post_id” : “2”,“post_text” : “Am terminat temele” : “post_date2”, “username” : “test2”, “number_of_comments” : “number_of_comments2” }\" +\n" +
+                        "                        \"{“post_id” : “3”,“post_text” : “Merg la pescuit”, “post_date3” : “post_date3”, “username” : “test3”, “number_of_comments” : “number_of_comments3” }\" +\n" +
+                        "                        \"{“post_id” : “4”,“post_text” : “Ma plimb in parc”, “post_date4” : “post_date4”, “username” : “test4”, “number_of_comments” : “number_of_comments4”}\" +\n" +
+                        "                        \"{“post_id” : “5”,“post_text” : “Imi beau cafeaua” : “post_date5”, “username” : “test5”, “number_of_comments” : “number_of_comments5”  }").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -4131,103 +4258,91 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        App.main(new String[]{"-create-user", "-u 'test7'", "-p 'test7'"});
 
-        App.main(new String[]{"-follow-user-by-username", "-u 'test'", "-p 'test'", "-username 'username1'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-create-user", "-u 'test8'", "-p 'test8'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-create-user", "-u 'test9'", "-p 'test9'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-create-user", "-u 'test10'", "-p 'test10'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-create-user", "-u 'test11'", "-p 'test11'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-follow-user-by-username", "-u 'test2'", "-p 'test2'", "-username 'username2'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test10'", "-p 'test10'", "-username 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-follow-user-by-username", "-u 'test3'", "-p 'test3'", "-username 'username3'"});
-
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
-
-        App.main(new String[]{"-follow-user-by-username", "-u 'test4'", "-p 'test4'", "-username 'username4'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test9'", "-p 'test9'", "-username 'test1'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-follow-user-by-username", "-u 'test5'", "-p 'test5'", "-username 'username5'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test8'", "-p 'test8'", "-username 'test3'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-follow-user-by-username", "-u 'test7'", "-p 'test7'", "-username 'test4'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-follow-user-by-username", "-u 'test6'", "-p 'test6'", "-username 'username6'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test6'", "-p 'test6'", "-username 'test5'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test1'", "-p 'test1'"," -text 'Astazi ma simt bine'", "date 'date1'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test5'", "-p 'test5'", "-username 'test6'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'"," -text 'Am terminat temele'", "date 'date2'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test4'", "-p 'test4'", "-username 'test5'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'"," -text 'Merg la pescuit'", "date 'date3'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test3'", "-p 'test3'", "-username 'test4'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'"," -text 'Ma plimb in parc'", "date 'date4'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test2'", "-p 'test2'", "-username 'test3'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test5'", "-p 'test5'"," -text 'Imi beau cafeaua'",  "date 'date5'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test1'", "-p 'test1'", "-username 'test2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-
-        App.main(new String[]{"-create-post", "-u 'test6'", "-p 'test6'"," -text 'Cerul este insorit'", "date 'date6'"});
-
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
-
-        App.main(new String[]{"-follow-post", "-u 'test'", "-p 'test'", "-post-id '1'"});
-
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
-
-        App.main(new String[]{"-follow-post", "-u 'test1'", "-p 'test2'", "-post-id '2'"});
-
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
-
-        App.main(new String[]{"-follow-post", "-u 'test3'", "-p 'test3'", "-post-id '3'"});
-
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
-
-        App.main(new String[]{"-follow-post", "-u 'test4'", "-p 'test4'", "-post-id '4'"});
-
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
-
-        App.main(new String[]{"-follow-post", "-u 'test5'", "-p 'test5'", "-post-id '5'"});
-
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
-
-        App.main(new String[]{"-follow-post", "-u 'test6'", "-p 'test6'", "-post-id '6'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test11'", "-p 'test11'", "-username 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
@@ -4235,18 +4350,35 @@ public class AppTest
 
 
 
+        App.main(new String[]{"-get-most-followed-users"," -u ‘test’ -p -'test'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
+        App.main(new String[]{"-get-most-followed-users"," -u ‘test2’ -p -'test1'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-get-top-followed-posts", "-n 5"});
+        App.main(new String[]{"-get-most-followed-users"," -u ‘test3’ -p -'test2'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-get-most-followed-users"," -u ‘test4’ -p -'test3'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-get-most-followed-users"," -u ‘test5’ -p -'test4'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
 
 
         // assertion
-        assertEquals(("{ 'status' : 'ok', 'message' :[{“username” : “test1”,“number_of_followers” : “100” } " +
-                        "{“username” : “test2”,“number_of_followers” : “120”}" +
-                        "{“username” : “test3”,“number_of_followers” : “130”}" +
-                        "{“username” : “test4”,“number_of_followers” : “140”}" +
-                        "{“username” : “test5”,“number_of_followers” : “150”}}").replace("' ", "'").replace(" '","'"),
+        assertEquals(("{ “status” : “ok”, “message” : [{“username” : “test”,“number_of_followers” : “ number_of_followers1” }" +
+                        "{“username” : “test2”,“number_of_followers” : “ number_of_followers2” }" +
+                        "{“username” : “test3”,“number_of_followers” : “ number_of_followers3” }" +
+                        "{“username” : “test4”,“number_of_followers” : “ number_of_followers4” }" +
+                        "{“username” : “test5”,“number_of_followers” : “ number_of_followers5” }" +
+                        " }").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -4411,37 +4543,37 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test1'", "-p 'test1'"," -text 'Astazi ma simt bine'", "date 'date1'"});
+        App.main(new String[]{"-create-post", "-u 'test1'", "-p 'test1'"," -text 'Astazi ma simt bine'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'"," -text 'Am terminat temele'", "date 'date2'"});
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'"," -text 'Am terminat temele'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'"," -text 'Merg la pescuit'", "date 'date3'"});
+        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'"," -text 'Merg la pescuit'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'"," -text 'Ma plimb in parc'", "date 'date4'"});
+        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'"," -text 'Ma plimb in parc'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test5'", "-p 'test5'"," -text 'Imi beau cafeaua'",  "date 'date5'"});
+        App.main(new String[]{"-create-post", "-u 'test5'", "-p 'test5'"," -text 'Imi beau cafeaua'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
 
-        App.main(new String[]{"-create-post", "-u 'test6'", "-p 'test6'"," -text 'Cerul este insorit'", "date 'date6'"});
+        App.main(new String[]{"-create-post", "-u 'test6'", "-p 'test6'"," -text 'Cerul este insorit'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
@@ -4477,16 +4609,72 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-get-most-liked-users", "-n 5"});
 
+        App.main(new String[]{"-get-top-commented-posts","-u ‘test1’ -p 'test1"});
+
+        App.main(new String[]{"-get-top-commented-posts","-u ‘test2’ -p 'test2"});
+
+        App.main(new String[]{"-get-top-commented-posts","-u ‘test3’ -p 'test3"});
+
+        App.main(new String[]{"-get-top-commented-posts","-u ‘test4’ -p 'test4"});
+
+        App.main(new String[]{"-get-top-commented-posts","-u ‘test5’ -p 'test5"});
+
+
+
+
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "-post-id '1'"});
+
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "-post-id '2'"});
+
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "-post-id '3'"});
+
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "-post-id '4'"});
+
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "-post-id '5'"});
+
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test2'", "-post-id '6'"});
+
+
+        App.main(new String[]{"-like-post", "-u 'test2'", "-p 'test2'", "-post-id '1'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-like-post", "-u 'test2'", "-p 'test2'", "-post-id '2'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-like-post", "-u 'test2'", "-p 'test2'", "-post-id '3'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-like-post", "-u 'test2'", "-p 'test2'", "-post-id '4'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-like-post", "-u 'test2'", "-p 'test2'", "-post-id '5'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-like-post", "-u 'test2'", "-p 'test2'", "-post-id '6'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-get-top-liked-posts", "-n 5"});
 
         // assertion
         assertEquals(("{ 'status' : 'ok', 'message' : " +
-                        "[{“username” : “test1”,“number_of_followers” : “100” }" +
-                        "{“username” : “test2”,“number_of_followers” : “110”}" +
-                        "{“username” : “test3”,“number_of_followers” : “120”}" +
-                        "{“username” : “test4”,“number_of_followers” : “130”}" +
-                        "{“username” : “test5”,“number_of_followers” : “140”}").replace("' ", "'").replace(" '","'"),
+                        "[{“username” : “test1”,“number_of_likes” : “number_of_likes1” }" +
+                        "{“username” : “test2”,“number_of_likes” : “number_of_likes2”}" +
+                        "{“username” : “test3”,“number_of_likes” : “number_of_likes3”}" +
+                        "{“username” : “test4”,“number_of_likes” : “number_of_likes4”}" +
+                        "{“username” : “test5”,“number_of_likes” : “number_of_likes5”}").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -4495,8 +4683,5 @@ public class AppTest
         // action
         App.main(new String[]{"-cleanup-all"});
     }
-
-
     //endregion
-
 }

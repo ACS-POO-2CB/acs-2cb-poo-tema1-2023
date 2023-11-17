@@ -3375,8 +3375,6 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         App.main(new String[]{"–get-following", "-u 'test'", "-p 'test'"});
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : [ “test2”, “test3”, “test4” ]}".replace("' ", "'").replace(" '","'"),
@@ -3602,8 +3600,6 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         App.main(new String[]{"–get-followers", "-u 'test'", "-p 'test'", "-username 'test'"});
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : [ “test2”, “test3”, “test4” ]}".replace("' ", "'").replace(" '","'"),
@@ -4200,8 +4196,6 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         App.main(new String[]{"-get-most-followed-users","-u 'test'", "-p -'test'"});
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
 
         // assertion
         assertEquals(("{ “status” : “ok”, “message” : [{“username” : “test”,“number_of_followers” : “ 4” }" +

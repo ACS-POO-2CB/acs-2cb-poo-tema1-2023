@@ -121,7 +121,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-create-user", "-u 'uchii_cu_cel'", "-p 'unghii2022'"});
+        App.main(new String[]{"-create-user", "-u 'uchii_cu_cel'", "-p 'unghii2023'"});
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : 'User created successfully'}".replace("' ", "'").replace(" '", "'"),
@@ -262,7 +262,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–create-post -u ‘test’ -p ‘test’"});
+        App.main(new String[]{"–create-post", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'No text provided'}".replace("' ", "'").replace(" '","'"),
@@ -1767,7 +1767,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'"," -text 'Astazi ma simt bine'"});
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'","-text 'Astazi ma simt bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -1980,7 +1980,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'"," -text 'Astazi ma simt bine'"});
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'","-text 'Astazi ma simt bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -2023,7 +2023,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'"," -text 'Astazi ma simt bine'"});
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'","-text 'Astazi ma simt bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -2186,31 +2186,31 @@ public class AppTest
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", " -text 'Astazi ma simt bine'"});
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", "-text 'Astazi ma simt bine'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", " -text 'Am terminat temele'"});
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'", "-text 'Am terminat temele'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'", " -text 'Merg la pescuit'"});
+        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'", "-text 'Merg la pescuit'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'", " -text 'Ma plimb in parc'"});
+        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'", "-text 'Ma plimb in parc'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-        App.main(new String[]{"-follow-user-by-username", "-u 'test1'", "-p 'test1'", " -username 'test2'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test1'", "-p 'test1'", "-username 'test2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-        App.main(new String[]{"-follow-user-by-username", "-u 'test1'", "-p 'test1'", " -username 'test3'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test1'", "-p 'test1'", "-username 'test3'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-        App.main(new String[]{"-follow-user-by-username", "-u 'test1'", "-p 'test1'", " -username 'test4'"});
+        App.main(new String[]{"-follow-user-by-username", "-u 'test1'", "-p 'test1'", "-username 'test4'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
@@ -2688,7 +2688,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'", " -text 'Am terminat temele'"});
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'", "-text 'Am terminat temele'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -2886,7 +2886,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–comment-post -u ‘test’ -p ‘test’"});
+        App.main(new String[]{"–comment-post", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'No text provided'}".replace("' ", "'").replace(" '","'"),
@@ -3203,7 +3203,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'"," -text 'Imi beau cafeaua'"});
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'","-text 'Imi beau cafeaua'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -3751,15 +3751,15 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'"," -text 'Astazi ma simt bine'"});
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'","-text 'Astazi ma simt bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'"," -text 'Am terminat temele'"});
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'","-text 'Am terminat temele'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'"," -text 'Merg la pescuit'"});
+        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'","-text 'Merg la pescuit'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -3931,15 +3931,15 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'"," -text 'Astazi ma simt bine'"});
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'","-text 'Astazi ma simt bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'"," -text 'Am terminat temele'"});
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'","-text 'Am terminat temele'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'"," -text 'Merg la pescuit'"});
+        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'","-text 'Merg la pescuit'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -3958,7 +3958,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-get-most-commented-posts","-u ‘test’ -p 'test"});
+        App.main(new String[]{"-get-most-commented-posts","-u 'test'", "-p 'test"});
 
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
@@ -4199,7 +4199,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-get-most-followed-users"," -u ‘test’ -p -'test'"});
+        App.main(new String[]{"-get-most-followed-users","-u 'test'", "-p -'test'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -4364,27 +4364,27 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'"," -text 'Astazi ma simt bine'"});
+        App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'","-text 'Astazi ma simt bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'"," -text 'Am terminat temele'"});
+        App.main(new String[]{"-create-post", "-u 'test2'", "-p 'test2'","-text 'Am terminat temele'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'"," -text 'Merg la pescuit'"});
+        App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'","-text 'Merg la pescuit'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'"," -text 'Ma plimb in parc'"});
+        App.main(new String[]{"-create-post", "-u 'test4'", "-p 'test4'","-text 'Ma plimb in parc'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test5'", "-p 'test5'"," -text 'Imi beau cafeaua'"});
+        App.main(new String[]{"-create-post", "-u 'test5'", "-p 'test5'","-text 'Imi beau cafeaua'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-create-post", "-u 'test6'", "-p 'test6'"," -text 'Cerul este insorit'"});
+        App.main(new String[]{"-create-post", "-u 'test6'", "-p 'test6'","-text 'Cerul este insorit'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 

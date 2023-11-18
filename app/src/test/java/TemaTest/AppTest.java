@@ -4202,7 +4202,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-get-most-followed-users","-u 'test'", "-p -'test'"});
+        App.main(new String[]{"-get-most-followed-users","-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals(("{ 'status' : 'ok', 'message' : [{'username' : 'test','number_of_followers' : ' 4' }," +
@@ -4433,7 +4433,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-get-most-liked-users", "-n 5"});
+        App.main(new String[]{"-get-most-liked-users",  "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals(("{ 'status' : 'ok', 'message' : " +

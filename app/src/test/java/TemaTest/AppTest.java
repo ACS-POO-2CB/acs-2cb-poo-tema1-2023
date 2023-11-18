@@ -893,7 +893,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"unfollow-user-by-username", "-u 'test'", "-p 'test'"});
+        App.main(new String[]{"-unfollow-user-by-username", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'No username to unfollow was provided'}".replace("' ", "'").replace(" '","'"),
@@ -1144,7 +1144,7 @@ public class AppTest
         App.main(new String[]{"-like-post", "-u 'test'", "-p 'test'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : 'No post identifier to like was povided'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'error', 'message' : 'No post identifier to like was provided'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -1405,7 +1405,7 @@ public class AppTest
         App.main(new String[]{"-unlike-post", "-u 'test'", "-p 'test'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : 'No post identifier to unlike was povided'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'error', 'message' : 'No post identifier to unlike was provided'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -1661,7 +1661,7 @@ public class AppTest
         App.main(new String[]{"-like-comment", "-u 'test'", "-p 'test'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : 'No comment identifier to like was povided'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'error', 'message' : 'No comment identifier to like was provided'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -1725,7 +1725,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"comment-post", "-u 'test'", "-p 'test'", "-post-id '1'", "-text 'Foarte bine'"});
+        App.main(new String[]{"-comment-post", "-u 'test'", "-p 'test'", "-post-id '1'", "-text 'Foarte bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -1771,7 +1771,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"comment-post", "-u 'test'", "-p 'test'", "post-id '1'", "-text 'Imi pare rau'"});
+        App.main(new String[]{"-comment-post", "-u 'test'", "-p 'test'", "-post-id '1'", "-text 'Imi pare rau'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -1984,7 +1984,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"comment-post", "-u 'test'", "-p 'test'", "post-id '1'", "-text 'Imi pare rau'"});
+        App.main(new String[]{"-comment-post", "-u 'test'", "-p 'test'", "-post-id '1'", "-text 'Imi pare rau'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -2027,7 +2027,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"comment-post", "-u 'test'", "-p 'test'", "post-id '1'", "-text 'Imi pare rau'"});
+        App.main(new String[]{"-comment-post", "-u 'test'", "-p 'test'", "-post-id '1'", "-text 'Imi pare rau'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -2218,12 +2218,16 @@ public class AppTest
         // action
         App.main(new String[]{"–get-followings-posts", "-u 'test'", "-p 'test'"});
 
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        String currentDateAsString = dateFormat.format(date);
+
         // assertion
-        assertEquals(("{ “status” : “ok”, “message” : [" +
-                        "{“post_id” : “4”, “post_text” : “Ma plimb in parc”, “post_date” : “date4”, “username” : “test4”}," +
-                        "{“post_id” : “3”, “post_text” : “Merg la pescuit”, “post_date” : “date3”, “username” : “test3”}," +
-                        "{“post_id” : “2”, “post_text” : “Am terminat temele”, “post_date” : “date2”, “username” : “test2”}," +
-                        "{“post_id” : “1”, “post_text” : “Astazi ma simt bine”, “post_date” : “date1”, “username” : “test1”}]}"
+        assertEquals(("{ 'status' : 'ok', 'message' : [" +
+                        "{'post_id' : '4', 'post_text' : 'Ma plimb in parc', 'post_date' : '" + currentDateAsString + "', 'username' : 'test4'}," +
+                        "{'post_id' : '3', 'post_text' : 'Merg la pescuit', 'post_date' : '" + currentDateAsString + "', 'username' : 'test3'}," +
+                        "{'post_id' : '2', 'post_text' : 'Am terminat temele', 'post_date' : '" + currentDateAsString + "', 'username' : 'test2'}," +
+                        "{'post_id' : '1', 'post_text' : 'Astazi ma simt bine', 'post_date' : '" + currentDateAsString + "', 'username' : 'test1'}]}"
                     )
                         .replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
@@ -2483,12 +2487,16 @@ public class AppTest
         System.setOut(new PrintStream(bos));
         App.main(new String[]{"-get-user-posts", "-u 'test'", "-p 'test'", "-username 'test2'"});
 
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        String currentDateAsString = dateFormat.format(date);
+
         // assertion
-        assertEquals(("{“status” : “ok”, “message” :" + " [" +
-                        "{“post_id” : “4”, “post_text” : “Ma plimb in parc”, “post_date” : “4”}" +
-                        "{“post_id” : “3”, “post_text” : “Merg la pescuit”, “post_date” : “3”}" +
-                        "{“post_id” : “2”, “post_text” : “Am terminat temele”, “post_date” : “date2”}" +
-                        "{“post_id” : “1”, “post_text” : “Astazi ma simt bine”, “post_date” : “date1”}," +
+        assertEquals(("{'status' : 'ok', 'message' :" + " [" +
+                        "{'post_id' : '4', 'post_text' : 'Ma plimb in parc', 'post_date' : '" + currentDateAsString + "'}," +
+                        "{'post_id' : '3', 'post_text' : 'Merg la pescuit', 'post_date' : '" + currentDateAsString + "'}," +
+                        "{'post_id' : '2', 'post_text' : 'Am terminat temele', 'post_date' : '" + currentDateAsString + "'}," +
+                        "{'post_id' : '1', 'post_text' : 'Astazi ma simt bine', 'post_date' : '" + currentDateAsString + "'}" +
                         "]}")
                         .replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
@@ -2631,7 +2639,7 @@ public class AppTest
         App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : 'No post identifier was povided'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'error', 'message' : 'No post identifier was provided'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -2737,18 +2745,18 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test'", "post-id '1'"});
+        App.main(new String[]{"–get-post-details", "-u 'test'", "-p 'test'", "-post-id '1'"});
 
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         String currentDateAsString = dateFormat.format(date);
 
         // assertion
-        assertEquals(("{“status” : “ok”, “message” : [{“post_text” : “Am terminat temele”, “post_date” :“" +
-                        currentDateAsString + "”, “username” : “test”, “number_of_likes” :" +
-                        " “0”, “comments” : [{“comment_id” : “2” ," +
-                        " “comment_text” : “Felicitari”, “comment_date” : “" + currentDateAsString + "”, " +
-                        "“username” : “test2”, “number_of_likes” : “0”}")
+        assertEquals(("{'status' : 'ok', 'message' : [{'post_text' : 'Am terminat temele', 'post_date' :'" +
+                        currentDateAsString + "', 'username' : 'test', 'number_of_likes' :" +
+                        " '0', 'comments' : [{'comment_id' : '2' ," +
+                        " 'comment_text' : 'Felicitari', 'comment_date' : '" + currentDateAsString + "', " +
+                        "'username' : 'test2', 'number_of_likes' : '0'}")
                         .replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
@@ -3100,7 +3108,7 @@ public class AppTest
         App.main(new String[]{"–delete-comment-by-id", "-u 'test'", "-p 'test'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : 'No identifier was povided'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'error', 'message' : 'No identifier was provided'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -3161,15 +3169,14 @@ public class AppTest
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-
         App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'", "-text 'Am terminat temele'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-
         App.main(new String[]{"–comment-post", "-u 'test'", "-p 'test'",  "-post-id '1'", "-text 'Sunt interese mari la mijloc.'"});
 
-        // action
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
         App.main(new String[]{"–delete-comment-by-id", "-u 'test2'", "-p 'test2'", "-id '1'"});
 
         // assertion
@@ -3207,7 +3214,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"–comment-post", "-u 'test2'", "-p 'test2'", "post-id '1'", "-text 'Si eu astazi ma simt bine'"});
+        App.main(new String[]{"–comment-post", "-u 'test2'", "-p 'test2'", "-post-id '1'", "-text 'Si eu astazi ma simt bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -3377,7 +3384,7 @@ public class AppTest
         App.main(new String[]{"–get-following", "-u 'test'", "-p 'test'"});
 
         // assertion
-        assertEquals("{ 'status' : 'ok', 'message' : [ “test2”, “test3”, “test4” ]}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : [ 'test2', 'test3', 'test4' ]}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -3602,7 +3609,7 @@ public class AppTest
         App.main(new String[]{"–get-followers", "-u 'test'", "-p 'test'", "-username 'test'"});
 
         // assertion
-        assertEquals("{ 'status' : 'ok', 'message' : [ “test2”, “test3”, “test4” ]}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : [ 'test2', 'test3', 'test4' ]}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -3778,9 +3785,9 @@ public class AppTest
         String currentDateAsString = dateFormat.format(date);
 
         // assertion
-        assertEquals(("{ “status” : “ok”, “message” : [{“post_id” : “1”,“post_text” : “Astazi ma simt bine”, “post_date” : “"+ currentDateAsString + "”, “username” : “test”, “number_of_likes” : “2” }," +
-                        "{“post_id” : “2”,“post_text” : “Am terminat temele”,  “post_date” : “" + currentDateAsString + "”, “username” : “test2”, “number_of_likes” : “1” }" +
-                        "{“post_id” : “3”,“post_text” : “Merg la pescuit”, “post_date” : “" + currentDateAsString + "”, “username” : “test3”, “number_of_likes” : “0” } ]" +
+        assertEquals(("{ 'status' : 'ok', 'message' : [{'post_id' : '1','post_text' : 'Astazi ma simt bine', 'post_date' : '"+ currentDateAsString + "', 'username' : 'test', 'number_of_likes' : '2' }," +
+                        "{'post_id' : '2','post_text' : 'Am terminat temele',  'post_date' : '" + currentDateAsString + "', 'username' : 'test2', 'number_of_likes' : '1' }" +
+                        "{'post_id' : '3','post_text' : 'Merg la pescuit', 'post_date' : '" + currentDateAsString + "', 'username' : 'test3', 'number_of_likes' : '0' } ]" +
                         "}").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
@@ -3941,15 +3948,15 @@ public class AppTest
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-        App.main(new String[]{"-comment-post", "-u 'test2'", "-p 'test2'", "post-id '1'", "-text 'Foarte bine'"});
+        App.main(new String[]{"-comment-post", "-u 'test2'", "-p 'test2'", "-post-id '1'", "-text 'Foarte bine'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-        App.main(new String[]{"-comment-post", "-u 'test3'", "-p 'test3'", "post-id '1'", "-text 'Forza Steaua'"});
+        App.main(new String[]{"-comment-post", "-u 'test3'", "-p 'test3'", "-post-id '1'", "-text 'Forza Steaua'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-        App.main(new String[]{"-comment-post", "-u 'test'", "-p 'test'", "post-id '2'", "-text 'Incredibil!'"});
+        App.main(new String[]{"-comment-post", "-u 'test'", "-p 'test'", "-post-id '2'", "-text 'Incredibil!'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
@@ -3961,9 +3968,9 @@ public class AppTest
         String currentDateAsString = dateFormat.format(date);
 
         // assertion
-        assertEquals(("{ “status” : “ok”, “message” : [{“post_id” : “1”,“post_text” : “Astazi ma simt bine”, “post_date” : “" + currentDateAsString + "”, “username” : “test”, “number_of_comments” : “2” },\" +\n" +
-                        "                        \"{“post_id” : “2”,“post_text” : “Am terminat temele”, “post_date” : “" + currentDateAsString + "”, “username” : “test2”, “number_of_comments” : “1” }\" +\n" +
-                        "                        \"{“post_id” : “3”,“post_text” : “Merg la pescuit”, “post_date” : “" + currentDateAsString + "”, “username” : “test3”, “number_of_comments” : “0” }\" +\n" +
+        assertEquals(("{ 'status' : 'ok', 'message' : [{'post_id' : '1','post_text' : 'Astazi ma simt bine', 'post_date' : '" + currentDateAsString + "', 'username' : 'test', 'number_of_comments' : '2' },\" +\n" +
+                        "                        \"{'post_id' : '2','post_text' : 'Am terminat temele', 'post_date' : '" + currentDateAsString + "', 'username' : 'test2', 'number_of_comments' : '1' }\" +\n" +
+                        "                        \"{'post_id' : '3','post_text' : 'Merg la pescuit', 'post_date' : '" + currentDateAsString + "', 'username' : 'test3', 'number_of_comments' : '0' }\" +\n" +
                         "]}").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
@@ -4198,11 +4205,11 @@ public class AppTest
         App.main(new String[]{"-get-most-followed-users","-u 'test'", "-p -'test'"});
 
         // assertion
-        assertEquals(("{ “status” : “ok”, “message” : [{“username” : “test”,“number_of_followers” : “ 4” }" +
-                        "{“username” : “test2”,“number_of_followers” : “ 3” }" +
-                        "{“username” : “test4”,“number_of_followers” : “ 2” }" +
-                        "{“username” : “test5”,“number_of_followers” : “ 1” }" +
-                        "{“username” : “test6”,“number_of_followers” : “ 1” }" +
+        assertEquals(("{ 'status' : 'ok', 'message' : [{'username' : 'test','number_of_followers' : ' 4' }" +
+                        "{'username' : 'test2','number_of_followers' : ' 3' }" +
+                        "{'username' : 'test4','number_of_followers' : ' 2' }" +
+                        "{'username' : 'test5','number_of_followers' : ' 1' }" +
+                        "{'username' : 'test6','number_of_followers' : ' 1' }" +
                         " }").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
@@ -4430,11 +4437,11 @@ public class AppTest
 
         // assertion
         assertEquals(("{ 'status' : 'ok', 'message' : " +
-                        "[{“username” : “test2”,“number_of_likes” : “3” }" +
-                        "{“username” : “test”,“number_of_likes” : “2”}" +
-                        "{“username” : “test6”,“number_of_likes” : “2”}" +
-                        "{“username” : “test3”,“number_of_likes” : “1”}" +
-                        "{“username” : “test4”,“number_of_likes” : “1”}").replace("' ", "'").replace(" '","'"),
+                        "[{'username' : 'test2','number_of_likes' : '3' }" +
+                        "{'username' : 'test','number_of_likes' : '2'}" +
+                        "{'username' : 'test6','number_of_likes' : '2'}" +
+                        "{'username' : 'test3','number_of_likes' : '1'}" +
+                        "{'username' : 'test4','number_of_likes' : '1'}").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System

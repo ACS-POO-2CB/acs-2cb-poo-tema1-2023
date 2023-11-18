@@ -2756,7 +2756,7 @@ public class AppTest
                         currentDateAsString + "', 'username' : 'test', 'number_of_likes' :" +
                         " '0', 'comments' : [{'comment_id' : '1' ," +
                         " 'comment_text' : 'Felicitari', 'comment_date' : '" + currentDateAsString + "', " +
-                        "'username' : 'test2', 'number_of_likes' : '0'}] }]")
+                        "'username' : 'test2', 'number_of_likes' : '0'}] }] }")
                         .replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
@@ -4210,7 +4210,7 @@ public class AppTest
                         "{'username' : 'test4','number_of_followers' : ' 2' }" +
                         "{'username' : 'test5','number_of_followers' : ' 1' }" +
                         "{'username' : 'test6','number_of_followers' : ' 1' }" +
-                        " }").replace("' ", "'").replace(" '","'"),
+                        " ]}").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -4441,7 +4441,7 @@ public class AppTest
                         "{'username' : 'test','number_of_likes' : '2'}" +
                         "{'username' : 'test6','number_of_likes' : '2'}" +
                         "{'username' : 'test3','number_of_likes' : '1'}" +
-                        "{'username' : 'test4','number_of_likes' : '1'}").replace("' ", "'").replace(" '","'"),
+                        "{'username' : 'test4','number_of_likes' : '1'}]}").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System

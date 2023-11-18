@@ -2216,7 +2216,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"–get-followings-posts", "-u 'test'", "-p 'test'"});
+        App.main(new String[]{"–get-followings-posts", "-u 'test1'", "-p 'test1'"});
 
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
@@ -2227,7 +2227,7 @@ public class AppTest
                         "{'post_id' : '4', 'post_text' : 'Ma plimb in parc', 'post_date' : '" + currentDateAsString + "', 'username' : 'test4'}," +
                         "{'post_id' : '3', 'post_text' : 'Merg la pescuit', 'post_date' : '" + currentDateAsString + "', 'username' : 'test3'}," +
                         "{'post_id' : '2', 'post_text' : 'Am terminat temele', 'post_date' : '" + currentDateAsString + "', 'username' : 'test2'}," +
-                        "{'post_id' : '1', 'post_text' : 'Astazi ma simt bine', 'post_date' : '" + currentDateAsString + "', 'username' : 'test1'}]}"
+                        "{'post_id' : '1', 'post_text' : 'Astazi ma simt bine', 'post_date' : '" + currentDateAsString + "', 'username' : 'test2'}]}"
                     )
                         .replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));

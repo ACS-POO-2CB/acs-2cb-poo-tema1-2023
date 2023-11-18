@@ -2754,9 +2754,9 @@ public class AppTest
         // assertion
         assertEquals(("{'status' : 'ok', 'message' : [{'post_text' : 'Am terminat temele', 'post_date' :'" +
                         currentDateAsString + "', 'username' : 'test', 'number_of_likes' :" +
-                        " '0', 'comments' : [{'comment_id' : '2' ," +
+                        " '0', 'comments' : [{'comment_id' : '1' ," +
                         " 'comment_text' : 'Felicitari', 'comment_date' : '" + currentDateAsString + "', " +
-                        "'username' : 'test2', 'number_of_likes' : '0'}")
+                        "'username' : 'test2', 'number_of_likes' : '0'}] }]")
                         .replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
@@ -3778,7 +3778,7 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-get-most-liked-posts"});
+        App.main(new String[]{"-get-most-liked-posts", "-u 'test'", "-p 'test'"});
 
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
@@ -3786,7 +3786,7 @@ public class AppTest
 
         // assertion
         assertEquals(("{ 'status' : 'ok', 'message' : [{'post_id' : '1','post_text' : 'Astazi ma simt bine', 'post_date' : '"+ currentDateAsString + "', 'username' : 'test', 'number_of_likes' : '2' }," +
-                        "{'post_id' : '2','post_text' : 'Am terminat temele',  'post_date' : '" + currentDateAsString + "', 'username' : 'test2', 'number_of_likes' : '1' }" +
+                        "{'post_id' : '2','post_text' : 'Am terminat temele', 'post_date' : '" + currentDateAsString + "', 'username' : 'test2', 'number_of_likes' : '1' }," +
                         "{'post_id' : '3','post_text' : 'Merg la pescuit', 'post_date' : '" + currentDateAsString + "', 'username' : 'test3', 'number_of_likes' : '0' } ]" +
                         "}").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
@@ -3961,16 +3961,16 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-get-most-commented-posts","-u 'test'", "-p 'test"});
+        App.main(new String[]{"-get-most-commented-posts","-u 'test'", "-p 'test'"});
 
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         String currentDateAsString = dateFormat.format(date);
 
         // assertion
-        assertEquals(("{ 'status' : 'ok', 'message' : [{'post_id' : '1','post_text' : 'Astazi ma simt bine', 'post_date' : '" + currentDateAsString + "', 'username' : 'test', 'number_of_comments' : '2' },\" +\n" +
-                        "                        \"{'post_id' : '2','post_text' : 'Am terminat temele', 'post_date' : '" + currentDateAsString + "', 'username' : 'test2', 'number_of_comments' : '1' }\" +\n" +
-                        "                        \"{'post_id' : '3','post_text' : 'Merg la pescuit', 'post_date' : '" + currentDateAsString + "', 'username' : 'test3', 'number_of_comments' : '0' }\" +\n" +
+        assertEquals(("{ 'status' : 'ok', 'message' : [{'post_id' : '1','post_text' : 'Astazi ma simt bine', 'post_date' : '" + currentDateAsString + "', 'username' : 'test', 'number_of_comments' : '2' }," +
+                        "{'post_id' : '2','post_text' : 'Am terminat temele', 'post_date' : '" + currentDateAsString + "', 'username' : 'test2', 'number_of_comments' : '1' }," +
+                        "{'post_id' : '3','post_text' : 'Merg la pescuit', 'post_date' : '" + currentDateAsString + "', 'username' : 'test3', 'number_of_comments' : '0' }" +
                         "]}").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 

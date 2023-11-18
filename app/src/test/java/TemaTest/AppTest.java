@@ -3997,7 +3997,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-get-most-followed-posts"});
+        App.main(new String[]{"-get-most-followed-users"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -4022,7 +4022,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-get-most-followed-posts", "-u 'test'"});
+        App.main(new String[]{"-get-most-followed-users", "-u 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -4047,7 +4047,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-get-most-followed-posts", "-u 'test'", "-p 'test'"});
+        App.main(new String[]{"-get-most-followed-users", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -4078,7 +4078,7 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         // action
-        App.main(new String[]{"-get-most-followed-posts", "-u 'test'", "-p 'test2'"});
+        App.main(new String[]{"-get-most-followed-users", "-u 'test'", "-p 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -4205,10 +4205,10 @@ public class AppTest
         App.main(new String[]{"-get-most-followed-users","-u 'test'", "-p -'test'"});
 
         // assertion
-        assertEquals(("{ 'status' : 'ok', 'message' : [{'username' : 'test','number_of_followers' : ' 4' }" +
-                        "{'username' : 'test2','number_of_followers' : ' 3' }" +
-                        "{'username' : 'test4','number_of_followers' : ' 2' }" +
-                        "{'username' : 'test5','number_of_followers' : ' 1' }" +
+        assertEquals(("{ 'status' : 'ok', 'message' : [{'username' : 'test','number_of_followers' : ' 4' }," +
+                        "{'username' : 'test2','number_of_followers' : ' 3' }," +
+                        "{'username' : 'test4','number_of_followers' : ' 2' }," +
+                        "{'username' : 'test5','number_of_followers' : ' 1' }," +
                         "{'username' : 'test6','number_of_followers' : ' 1' }" +
                         " ]}").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
@@ -4433,14 +4433,14 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        App.main(new String[]{"-get-top-liked-posts", "-n 5"});
+        App.main(new String[]{"-get-most-liked-users", "-n 5"});
 
         // assertion
         assertEquals(("{ 'status' : 'ok', 'message' : " +
-                        "[{'username' : 'test2','number_of_likes' : '3' }" +
-                        "{'username' : 'test','number_of_likes' : '2'}" +
-                        "{'username' : 'test6','number_of_likes' : '2'}" +
-                        "{'username' : 'test3','number_of_likes' : '1'}" +
+                        "[{'username' : 'test2','number_of_likes' : '3' }," +
+                        "{'username' : 'test','number_of_likes' : '2'}," +
+                        "{'username' : 'test6','number_of_likes' : '2'}," +
+                        "{'username' : 'test3','number_of_likes' : '1'}," +
                         "{'username' : 'test4','number_of_likes' : '1'}]}").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 

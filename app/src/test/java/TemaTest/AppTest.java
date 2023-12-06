@@ -2736,6 +2736,10 @@ public class AppTest
         System.setOut(new PrintStream(bos));
 
         App.main(new String[]{"-create-post", "-u 'test'", "-p 'test'", "-text 'Am terminat temele'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        App.main(new String[]{"-follow-user-by-username", "-u 'test2'", "-p 'test2'", "-username 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
@@ -3917,7 +3921,7 @@ public class AppTest
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        //App.main(new String[]{"-cleanup-all"});
+        App.main(new String[]{"-cleanup-all"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 

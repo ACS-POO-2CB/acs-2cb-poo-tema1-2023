@@ -3218,6 +3218,10 @@ public class AppTest
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+        App.main(new String[]{"-follow-user-by-username", "-u 'test2'", "-p 'test2'", "-username 'test'"});
+
         App.main(new String[]{"-comment-post", "-u 'test2'", "-p 'test2'", "-post-id '1'", "-text 'Si eu astazi ma simt bine'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
@@ -3949,6 +3953,18 @@ public class AppTest
         App.main(new String[]{"-create-post", "-u 'test3'", "-p 'test3'","-text 'Merg la pescuit'"});
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+        App.main(new String[]{"-follow-user-by-username", "-u 'test2'", "-p 'test2'", "-username 'test'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+        App.main(new String[]{"-follow-user-by-username", "-u 'test3'", "-p 'test3'", "-username 'test'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+        App.main(new String[]{"-follow-user-by-username", "-u 'test'", "-p 'test'", "-username 'test2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));

@@ -4214,7 +4214,7 @@ public class AppTest
                         "{'username' : 'test4','number_of_followers' : ' 2' }," +
                         "{'username' : 'test5','number_of_followers' : ' 1' }," +
                         "{'username' : 'test6','number_of_followers' : ' 1' }" +
-                        " ]}").replace("' ", "'").replace(" '","'"),
+                        "]}").replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
